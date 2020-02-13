@@ -1,24 +1,45 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
+const jsFrameworks = [
+  "React",
+  "Angular",
+  "Ember",
+  "Backbone.js",
+  "Vue",
+  "Meteor",
+  "Node.js",
+  "Polymer"
+];
+
 function App() {
+  const [searchTerm, setSearchTerm] = React.useState("");
+  const [searchResults, setSearchResults] = React.useState([]);
+  const handleChange = event => {
+    setSearchTerm(event.target.value);
+  };
+  React.useEffect(() => {
+    const results = jsFrameworks.filter(jsFrameworksSearch =>
+      jsFrameworksSearch.toLowerCase().includes(searchTerm.trim()));
+    setSearchResults(results);
+  }, [searchTerm]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div class="title">Real-time Search</div>
+    <div class="frame">
+    <input
+    type="text"
+    placeholder="Type here..."
+    value={searchTerm}
+    onChange={handleChange}
+    />
+    <ul>
+    {searchResults.map(item => (
+      <li>{item}</li>
+    ))}
+    </ul>
+    </div>
     </div>
   );
 }
