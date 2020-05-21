@@ -1,2 +1,3 @@
 # Real-time search
-A project built using React.js
+A real-time search project built using React.js
+
